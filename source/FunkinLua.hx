@@ -1846,9 +1846,7 @@ Lua_helper.add_callback(lua, "clearShadersFromCamera", function(cameraName)
 		Discord.DiscordClient.addLuaCallbacks(lua);
 
 		call('onCreate', []);
-					#end}
-	}
-			
+		#end
 	}
 
 	inline static function getTextObject(name:String):FlxText
