@@ -10,10 +10,9 @@ import WiggleEffect.WiggleEffectType;
 import flixel.FlxBasic;
 import flixel.FlxCamera;
 import flixel.FlxG;
+import flixel.FlxGame;
 import openfl.filters.ShaderFilter;
 import Shaders;
-import openfl.display.Shader;
-import flixel.FlxGame;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -1203,8 +1202,12 @@ class PlayState extends MusicBeatState
 
 		Conductor.safeZoneOffset = (ClientPrefs.safeFrames / 60) * 1000;
 		callOnLuas('onCreatePost', []);
-		
+
 		super.create();
+		if(curSong.toLowerCase() == "bopeebo" && ClientPrefs.shaders){ //ONDE TA BOPEEBO E O NOME DA SUA MUSICA
+			addShaderToCamera('camGame', new VCRDistortionEffect(0.1, true, true, true));
+			addShaderToCamera('camHUD', new VCRDistortionEffect(0.1, true, true, true));
+		}
 
 		Paths.clearUnusedMemory();
 		CustomFadeTransition.nextCamera = camOther;
@@ -1319,8 +1322,8 @@ class PlayState extends MusicBeatState
 		}
 		#end
 	}
-	
-	public function addShaderToCamera(cam:String,effect:Dynamic){//STOLE FROM ANDROMEDA
+
+	public function addShaderToCamera(cam:String,effect:ShaderEffect){//STOLE FROM ANDROMEDA AND PSYCH ENGINE 0.5.1 WITH SHADERS
 	  
 	  
 	  
@@ -1385,15 +1388,12 @@ class PlayState extends MusicBeatState
 					}
 					camOther.setFilters(newCamEffects);
 			default: 
-				if(modchartSprites.exists(cam)) {
-					Reflect.setProperty(modchartSprites.get(cam),"shader",null);
-				} else if(modchartTexts.exists(cam)) {
-					Reflect.setProperty(modchartTexts.get(cam),"shader",null);
-				} else {
-					var OBJ = Reflect.getProperty(PlayState.instance,cam);
-					Reflect.setProperty(OBJ,"shader", null);
+				camGameShaders.remove(effect);
+				var newCamEffects:Array<BitmapFilter>=[];
+				for(i in camGameShaders){
+				  newCamEffects.push(new ShaderFilter(i.shader));
 				}
-				
+				camGame.setFilters(newCamEffects);
 		}
 		
 	  
@@ -1413,10 +1413,6 @@ class PlayState extends MusicBeatState
 				camOtherShaders = [];
 				var newCamEffects:Array<BitmapFilter>=[];
 				camOther.setFilters(newCamEffects);
-			case 'camgame' | 'game': 
-				camGameShaders = [];
-				var newCamEffects:Array<BitmapFilter>=[];
-				camGame.setFilters(newCamEffects);
 			default: 
 				camGameShaders = [];
 				var newCamEffects:Array<BitmapFilter>=[];
@@ -1426,10 +1422,6 @@ class PlayState extends MusicBeatState
 	  
   }
 	
-	
-	
-	
-
 	function startCharacterPos(char:Character, ?gfCheck:Bool = false) {
 		if(gfCheck && char.curCharacter.startsWith('gf')) { //IF DAD IS GIRLFRIEND, HE GOES TO HER POSITION
 			char.setPosition(GF_X, GF_Y);
@@ -2733,7 +2725,10 @@ class PlayState extends MusicBeatState
 		setOnLuas('cameraY', camFollowPos.y);
 		setOnLuas('botPlay', cpuControlled);
 		callOnLuas('onUpdatePost', [elapsed]);
-	}
+		for (i in shaderUpdates){
+			i(elapsed);
+	    }
+    }
 
 	function openChartEditor()
 	{
@@ -2750,7 +2745,7 @@ class PlayState extends MusicBeatState
 
 	public var isDead:Bool = false; //Don't mess with this on Lua!!!
 	function doDeathCheck(?skipHealthCheck:Bool = false) {
-		if (((skipHealthCheck && instakillOnMiss) || health <= 0) && !practiceMode && !isDead)
+		if (((skipHealthCheck && instakillOnMiss) || health <= 0) && !practiceMode && !isDead && !ClientPrefs.easyMode)
 		{
 			var ret:Dynamic = callOnLuas('onGameOver', []);
 			if(ret != FunkinLua.Function_Stop) {
