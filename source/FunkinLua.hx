@@ -27,7 +27,7 @@ import openfl.display.BlendMode;
 import openfl.display.ShaderParameter;
 import openfl.filters.BitmapFilter;
 import openfl.filters.ShaderFilter;
-import openfl.utils.Assets;
+import openfl.utils.Assets as OpenFlAssets;
 import flixel.math.FlxMath;
 import flixel.util.FlxSave;
 import Shaders;
