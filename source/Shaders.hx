@@ -1148,9 +1148,9 @@ class BlockedGlitchEffect
     public var time(default, set):Float = 0;
     public var resolution(default, set):Float = 0;
     public var colorMultiplier(default, set):Float = 0;
-    public var hasColorTransform(default, set):Bool = false;
+    public var hasColorTransform(default, set):Float = false;
 
-    public function new(res:Float, time:Float, colorMultiplier:Float, colorTransform:Bool):Void
+    public function new(res:Float, time:Float, colorMultiplier:Float, colorTransform:Float):Void
     {
         set_time(time);
         set_resolution(res);
@@ -1167,7 +1167,7 @@ class BlockedGlitchEffect
         shader.screenSize.value = [resolution];
         return this.resolution;
     }
-	function set_hasColorTransform(value:Bool):Bool {
+	function set_hasColorTransform(value:Float):Float {
 		this.hasColorTransform = value;
         shader.hasColorTransform.value = [hasColorTransform];
         return hasColorTransform;
