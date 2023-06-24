@@ -1771,12 +1771,11 @@ class FunkinLua {
 			PlayState.instance.addShaderToCamera(camera, new PulseEffect(waveSpeed,waveFrq,waveAmp));
 			
 		});
-		#if (flixel < "5.0.0")
-		Lua_helper.add_callback(lua, "addBlockedGlitchEffect", function(camera:String,time:Float = 0.1,resolution:Float = 0.1,colorMultiplier:Float = 0.1,hasColorTransform:Float = 0.1) {
+		
+		Lua_helper.add_callback(lua, "addBlockedGlitchEffect", function(camera:String, #if (flixel < "5.0.0") time:Float = 0.1,resolution:Float = 0.1,colorMultiplier:Float = 0.1,hasColorTransform:Float = 0.1 #end) {
 			
 			PlayState.instance.addShaderToCamera(camera, new BlockedGlitchEffect(time,resolution,colorMultiplier,hasColorTransform));
-		#end
-		}	
+		
 		});
 		Lua_helper.add_callback(lua, "addDistortionEffect", function(camera:String,waveSpeed:Float = 0.1,waveFrq:Float = 0.1,waveAmp:Float = 0.1) {
 			
