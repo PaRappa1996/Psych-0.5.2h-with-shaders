@@ -1150,7 +1150,7 @@ class BlockedGlitchEffect
     public var colorMultiplier(default, set):Float = 0;
     //public var hasColorTransform(default, set):Bool = false;
 
-    public function new(res:Float, time:Float, colorMultiplier:Float, /*colorTransform:Bool*/):Void
+    public function new(res:Float, time:Float, colorMultiplier:Float/*, colorTransform:Bool*/):Void
     {
         set_time(time);
         set_resolution(res);
