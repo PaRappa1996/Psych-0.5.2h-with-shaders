@@ -1772,7 +1772,7 @@ class FunkinLua {
 			
 		});
 		
-		Lua_helper.add_callback(lua, "addBlockedGlitchEffect", function(camera:String, #if (flixel < "5.0.0") time:Float = 0.1,resolution:Float = 0.1,colorMultiplier:Float = 0.1,hasColorTransform:Float = 0.1 #end) {
+		Lua_helper.add_callback(lua, "addBlockedGlitchEffect", function(camera:String, #if (flixel < "5.0.0") time:Float = 0.1,resolution:Float = 0.1,colorMultiplier:Float = 0.1,hasColorTransform:Float = 0.1 #end)) {
 			
 			PlayState.instance.addShaderToCamera(camera, new BlockedGlitchEffect(time,resolution,colorMultiplier,hasColorTransform));
 		
