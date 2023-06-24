@@ -1733,8 +1733,6 @@ class FunkinLua {
 					
 					
 		//SHADER SHIT
-
-		#if (flixel < "5.0.0")
 			 
 		Lua_helper.add_callback(lua, "addChromaticAbberationEffect", function(camera:String,chromeOffset:Float = 0.005) {
 			
@@ -1774,7 +1772,7 @@ class FunkinLua {
 			
 		});
 		
-		Lua_helper.add_callback(lua, "addBlockedGlitchEffect", function(camera:String,time:Float = 0.1,resolution:Float = 0.1,colorMultiplier:Float = 0.1,hasColorTransform:Float = 0.1) {
+		Lua_helper.add_callback(lua, "addBlockedGlitchEffect", function(camera:String,time:Bool = 0.1,resolution:Bool = 0.1,colorMultiplier:Bool = 0.1,hasColorTransform:Bool = 0.1) {
 			
 			PlayState.instance.addShaderToCamera(camera, new BlockedGlitchEffect(time,resolution,colorMultiplier,hasColorTransform));
 		
