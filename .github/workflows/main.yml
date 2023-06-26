@@ -32,7 +32,7 @@ jobs:
       - name: Install Haxelib
         run: |
           haxelib setup ~/haxelib
-          haxelib install hxcpp 4.1.15 > /dev/null
+          haxelib install hxcpp 4.2.1 > /dev/null
           haxelib install lime
           haxelib install openfl
           haxelib --never install flixel
@@ -117,7 +117,7 @@ jobs:
       - name: Install Haxelib
         run: |
           haxelib setup ~/haxelib
-          haxelib install hxcpp 4.1.15 > /dev/null
+          haxelib install hxcpp 4.2.1 > /dev/null
           haxelib install lime
           haxelib install openfl
           haxelib --never install flixel
