@@ -51,6 +51,7 @@ jobs:
         run: echo "${{github.run_id}}" > VERSION
       - name: Setup Hxcpp
         run: |
+          haxelib run lime setup -alias -y
           haxelib set hxcpp 4.2.1
       - name: Compile
         run: haxelib run lime build Project.xml linux --app-version="4.0.0-${{ github.run_id}}"
@@ -93,6 +94,7 @@ jobs:
         run: echo "${{github.run_id}}" > VERSION
       - name: Setup Hxcpp
         run: |
+          haxelib run lime setup -alias -y
           haxelib set hxcpp 4.2.1
       - name: Compile
         run: haxelib run lime build windows --app-version="4.0.0-${{ github.run_id}}"
@@ -134,6 +136,7 @@ jobs:
         run: echo "${{github.run_id}}" > VERSION
       - name: Setup Hxcpp
         run: |
+          haxelib run lime setup -alias -y
           haxelib set hxcpp 4.2.1
       - name: Compile
         run: haxelib run lime build mac --app-version="4.0.0-${{ github.run_id}}"
